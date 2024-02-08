@@ -46,11 +46,11 @@ const TopUsers = async (req, res, next) => {
             const resp = await transactions.findAll({
                 attributes: [
                     'UserID',
-                    [sequelize.fn('sum', sequelize.col('Amount')), 'total_amount'],
+                    [Sequelize.fn('sum', Sequelize.col('Amount')), 'total_amount'],
                   ],
-                group : [UserID],
+                group : ["UserID"],
                 order : [["total_amount", "DESC"]],
-                limit : req.query.limit,
+                limit : parseInt(req.query.limit),
                 raw: true
             })
             console.log(resp)
